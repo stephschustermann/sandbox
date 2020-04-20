@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Component1 from './functional/component1';
 import Container1 from './containers/container1';
 import Container2 from './containers/container2';
+import Container3 from './containers/container3';
 
 import './App.css';
 import * as styles from './styles'
@@ -17,6 +18,7 @@ class App extends Component {
         <Container1 nickname='dfffd' />
         <Component1 name = 'dddd' age={25}/>
         <Container2 />
+        <Container3 />
       </div>
     );
   }

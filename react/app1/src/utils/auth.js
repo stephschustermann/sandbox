@@ -38,6 +38,8 @@ export default class Auth {
 
     isAuthenticated = () => {
         let expiresAt = JSON.parse(localStorage.getItem('expiresAt'));
-        return new Date().getTime() < expiresAt;
+        const result = new Date().getTime() < expiresAt;
+        console.log(`isAuthenticated ${result}`);
+        return result;
     }
 }

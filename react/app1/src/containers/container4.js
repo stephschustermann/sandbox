@@ -7,7 +7,6 @@ class Container4 extends Component {
         const usesr_text = 'ffdf';
         return (
             <div>
-                <button onClick={() => this.props.auth.login()}> Login </button>
                 <button onClick={() => console.log(this.props.stateProp1)}> Get State </button>
                 <button onClick={()=> this.props.action_creator1()}> Dispatch Action Creator 1 </button>
                 <button onClick={()=> this.props.action_creator2()}> Dispatch Action Creator 2 </button>

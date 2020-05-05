@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    hello: null,
+  }
+
+  componentDidMount() {
+    axios.get('/hello')
+      .then(res => this.setState({ hello: res.data }))
+      .catch(err => console.log(err))
+    this.asyncFunction();
+  }
+
+  asyncFunction = async () => {
+    await fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(json => console.log(json));
+  }
+
+  render() {
+    return (
+      <div>
+        {
+          this.state.hello
+          ? <div> {this.state.hello} </div>
+          : null
+        }
+      </div>
+    )
+  }
 }
 
 export default App;

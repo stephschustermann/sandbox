@@ -31,7 +31,7 @@ const AuthReducer = (state = initialState, action) => {
     case ACTION_TYPES.SET_DB_PROFILE:
         return {
           ...state,
-          db_profile: action.payload
+          db_profile: action.payload,
         }
       case ACTION_TYPES.REMOVE_DB_PROFILE:
         return {

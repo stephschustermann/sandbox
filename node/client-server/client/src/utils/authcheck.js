@@ -9,8 +9,9 @@ import * as ACTIONS from '../store/actions/actions';
 
 class AuthCheck extends Component {
   send_profile_to_db = (profile) => {
+    console.log('send_profile_to_db')
     const data = profile;
-    axios.post('/api/posts/userprofiletodb', data)
+    axios.post('/api/post/userprofiletodb', data)
       .then(() => axios.get('/api/get/userprofilefromdb', { params: { email: profile.profile.email } }))
       .then(res => this.props.set_db_profile(res.data))
       .then(history.replace('/'))
@@ -20,7 +21,7 @@ class AuthCheck extends Component {
     if(this.props.auth.isAuthenticated()) {
       this.props.login_success()
       this.props.add_profile(this.props.auth.userProfile)
-      this.set_db_profile(this.props.auth.userProfile)
+      this.send_profile_to_db(this.props.auth.userProfile)
       history.replace('/')
     }
     else {

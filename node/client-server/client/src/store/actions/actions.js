@@ -33,7 +33,7 @@ export const login_failure = () => {
 
 export const add_profile = (profile) => {
     return {
-        type: ACTION_TYPES.SUCCESS,
+        type: ACTION_TYPES.ADD_PROFILE,
         payload: profile,
     };
 }
@@ -80,5 +80,18 @@ export const fetch_posts_comments = (comments) => {
 export const remove_posts_comments = () => {
     return {
         type: ACTION_TYPES.REMOVE_POST_COMMENTS,
+    };
+}
+
+export const fetch_user_posts = (posts) => {
+    return {
+        type: ACTION_TYPES.FETCH_USER_POSTS,
+        payload: posts,
+    };
+}
+
+export const remove_user_posts = () => {
+    return {
+        type: ACTION_TYPES.REMOVE_USER_POSTS,
     };
 }

@@ -33,7 +33,7 @@ class Posts extends Component {
 
     render() {
         return (<div>
-            <Link to='/newpost'>
+            <Link to='/addpost'>
                 <Button color='primary'>Add Post</Button>
             </Link>
             <br />

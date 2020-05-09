@@ -13,17 +13,6 @@ import Button from '@material-ui/core/Button';
 import * as ACTIONS from '../store/actions/actions';
 import history from '../utils/history'
 
-const RenderComents = (comment) => (<div>
-    <h3>{comment.comment.comment}</h3>
-    <small>{comment.comment.date_created}</small>
-    <p> By: {comment.comment.author}</p>
-    {comment.cur_user_id === comment.comment.user_id
-    ? <Button onClick={()=> this.handleClickOpen(comment.comment.cid, comment.comment.comment)}>
-        Edit
-    </Button> 
-    : null}
-</div>)
-
 class ShowPost extends Component {
     constructor(props) {
         super(props);
@@ -55,11 +44,11 @@ class ShowPost extends Component {
     handleSubmit = (event) => {
         event.preventDefault() // is called from a form, so need to prevent the browser to reload
         const user_id = this.props.db_profile[0].uid;
-        const post_id = this.props.location.state.post.post.post_id;
+        const post_id = this.props.location.state.post.post.pid;
         const username = this.props.db_profile[0].username;
         const data = { comment: event.target.comment.value, post_id, user_id, username };
 
-        axios.post('api/post/commenttodb', data)
+        axios.post('/api/post/commenttodb', data)
             .then(res => console.log(res))
             .catch(err => console.log(err))
             .then(setTimeout(() => history.replace('/posts'), 700))
@@ -69,11 +58,11 @@ class ShowPost extends Component {
         const comment = this.state.comment;
         const cid = this.state.cid;
         const user_id = this.props.db_profile[0].uid;
-        const post_id = this.props.location.state.post.post.post_id;
+        const post_id = this.props.location.state.post.post.pid;
         const username = this.props.db_profile[0].username;
         const data = { cid, comment, post_id, user_id, username };
 
-        axios.put('api/put/commenttodb', data)
+        axios.put('/api/put/commenttodb', data)
             .then(res => console.log(res))
             .catch(err => console.log(err))
             .then(setTimeout(() => history.replace('/posts'), 700))
@@ -89,6 +78,17 @@ class ShowPost extends Component {
 
     }
 
+    RenderComments = (comment) => (<div>
+        <h3>{comment.comment.comment}</h3>
+        <small>{comment.comment.date_created}</small>
+        <p> By: {comment.comment.author}</p>
+        {comment.cur_user_id === comment.comment.user_id
+        ? <Button onClick={()=> this.handleClickOpen(comment.comment.cid, comment.comment.comment)}>
+            Edit
+        </Button> 
+        : null}
+    </div>)
+
     render() {
         return(<div>
             <div>
@@ -101,7 +101,7 @@ class ShowPost extends Component {
                 <h2>Comments:</h2>
                 {this.props.comments
                 ? this.props.comments.map(comment =>
-                    <RenderComents comment={comment} cur_user_id={this.props.db_profile[0].uid} key={comment.cid} />)
+                    <this.RenderComments comment={comment} cur_user_id={this.props.db_profile[0].uid} key={comment.cid} />)
                 : null}
             </div>
             <div>

@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
   auth_reducer: AuthReducer,
   user_reducer: UserReducer,
-  post_reducer: PostReducer,
+  posts_reducer: PostReducer,
 })
 
 export default rootReducer;
